@@ -1,0 +1,1 @@
+{"hardware": {"Identifier": "/intelcpu/0", "Name": "Intel Core i5", "HardwareType": "Cpu"}, "sensors": {"Identifier": "/intelcpu/0/temperature/0", "Name": "CPU Package", "Value": 49.5, "Parent": "/intelcpu/0"}}

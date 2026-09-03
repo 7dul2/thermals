@@ -1,0 +1,52 @@
+{
+  "hardware": [
+    {
+      "Identifier": "/amdcpu/0",
+      "Name": "AMD Ryzen 9 7950X",
+      "HardwareType": "Cpu"
+    },
+    {
+      "Identifier": "/amdgpu/0",
+      "Name": "AMD Radeon RX 7800 XT",
+      "HardwareType": "GpuAmd"
+    }
+  ],
+  "sensors": [
+    {
+      "Identifier": "/amdcpu/0/temperature/0",
+      "Name": "Core (Tctl/Tdie)",
+      "Value": 61.25,
+      "Parent": "/amdcpu/0"
+    },
+    {
+      "Identifier": "/amdcpu/0/temperature/1",
+      "Name": "CCD1 (Tdie)",
+      "Value": 52.0,
+      "Parent": "/amdcpu/0"
+    },
+    {
+      "Identifier": "/amdcpu/0/temperature/2",
+      "Name": "CCD2 (Tdie)",
+      "Value": 50.5,
+      "Parent": "/amdcpu/0"
+    },
+    {
+      "Identifier": "/amdgpu/0/temperature/0",
+      "Name": "GPU Core",
+      "Value": 44.0,
+      "Parent": "/amdgpu/0"
+    },
+    {
+      "Identifier": "/amdgpu/0/temperature/1",
+      "Name": "GPU Memory",
+      "Value": 50.0,
+      "Parent": "/amdgpu/0"
+    },
+    {
+      "Identifier": "/amdgpu/0/temperature/2",
+      "Name": "GPU Hot Spot",
+      "Value": 58.0,
+      "Parent": "/amdgpu/0"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "id": 0,
+  "Text": "Sensor",
+  "Children": [
+    {
+      "id": 1,
+      "Text": "DESKTOP",
+      "Children": [
+        {
+          "id": 2,
+          "Text": "Intel Core i7-12700K",
+          "ImageURL": "images_icon/cpu.png",
+          "Children": [
+            {
+              "id": 3,
+              "Text": "Temperatures",
+              "Children": [
+                {
+                  "id": 4,
+                  "Text": "CPU Core #1",
+                  "Min": "40.0 \u00b0C",
+                  "Value": "55,0 \u00b0C",
+                  "Max": "70.0 \u00b0C",
+                  "SensorId": "/intelcpu/0/temperature/0",
+                  "Type": "Temperature"
+                },
+                {
+                  "id": 5,
+                  "Text": "CPU Package",
+                  "Min": "41.0 \u00b0C",
+                  "Value": "57.0 \u00b0C",
+                  "Max": "72.0 \u00b0C",
+                  "SensorId": "/intelcpu/0/temperature/2",
+                  "Type": "Temperature"
+                }
+              ]
+            },
+            {
+              "id": 6,
+              "Text": "Load",
+              "Children": [
+                {
+                  "id": 7,
+                  "Text": "CPU Total",
+                  "Value": "12.3 %",
+                  "SensorId": "/intelcpu/0/load/0",
+                  "Type": "Load"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "Text": "NVIDIA GeForce RTX 3070",
+          "ImageURL": "images_icon/nvidia.png",
+          "Children": [
+            {
+              "id": 9,
+              "Text": "Temperatures",
+              "Children": [
+                {
+                  "id": 10,
+                  "Text": "GPU Core",
+                  "Value": "43.0 \u00b0C",
+                  "SensorId": "/nvidiagpu/0/temperature/0",
+                  "Type": "Temperature"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

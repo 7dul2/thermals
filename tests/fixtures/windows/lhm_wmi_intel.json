@@ -1,0 +1,92 @@
+{
+  "hardware": [
+    {
+      "Identifier": "/intelcpu/0",
+      "Name": "Intel Core i7-12700K",
+      "HardwareType": "Cpu"
+    },
+    {
+      "Identifier": "/nvidiagpu/0",
+      "Name": "NVIDIA GeForce RTX 3070",
+      "HardwareType": "GpuNvidia"
+    },
+    {
+      "Identifier": "/lpc/nct6798d/0",
+      "Name": "Nuvoton NCT6798D",
+      "HardwareType": "SuperIO"
+    },
+    {
+      "Identifier": "/nvme/0",
+      "Name": "Samsung SSD 980 PRO",
+      "HardwareType": "Storage"
+    }
+  ],
+  "sensors": [
+    {
+      "Identifier": "/intelcpu/0/temperature/0",
+      "Name": "CPU Core #1",
+      "Value": 55.0,
+      "Parent": "/intelcpu/0"
+    },
+    {
+      "Identifier": "/intelcpu/0/temperature/1",
+      "Name": "CPU Core #2",
+      "Value": 58.0,
+      "Parent": "/intelcpu/0"
+    },
+    {
+      "Identifier": "/intelcpu/0/temperature/2",
+      "Name": "CPU Package",
+      "Value": 57.0,
+      "Parent": "/intelcpu/0"
+    },
+    {
+      "Identifier": "/intelcpu/0/temperature/3",
+      "Name": "Core Max",
+      "Value": 58.0,
+      "Parent": "/intelcpu/0"
+    },
+    {
+      "Identifier": "/intelcpu/0/temperature/4",
+      "Name": "Core Average",
+      "Value": 56.5,
+      "Parent": "/intelcpu/0"
+    },
+    {
+      "Identifier": "/intelcpu/0/temperature/5",
+      "Name": "CPU Core #1 Distance to TjMax",
+      "Value": 45.0,
+      "Parent": "/intelcpu/0"
+    },
+    {
+      "Identifier": "/nvidiagpu/0/temperature/0",
+      "Name": "GPU Core",
+      "Value": 43.0,
+      "Parent": "/nvidiagpu/0"
+    },
+    {
+      "Identifier": "/nvidiagpu/0/temperature/1",
+      "Name": "GPU Hot Spot",
+      "Value": 55.0,
+      "Parent": "/nvidiagpu/0"
+    },
+    {
+      "Identifier": "/lpc/nct6798d/0/temperature/0",
+      "Name": "CPU",
+      "Value": 40.0,
+      "Parent": "/lpc/nct6798d/0"
+    },
+    {
+      "Identifier": "/lpc/nct6798d/0/temperature/1",
+      "Name": "System",
+      "Value": 35.0,
+      "Parent": "/lpc/nct6798d/0"
+    },
+    {
+      "Identifier": "/nvme/0/temperature/0",
+      "Name": "Temperature",
+      "Value": 38.0,
+      "Parent": "/nvme/0"
+    }
+  ]
+}
