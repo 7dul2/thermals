@@ -1,0 +1,105 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "thermals"
+dynamic = ["version"]
+description = "Cross-platform CPU, GPU, SoC temperature and thermal-state readings for Python"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "7dul2" }]
+keywords = [
+  "temperature",
+  "thermal",
+  "sensors",
+  "hwmon",
+  "cpu",
+  "gpu",
+  "apple-silicon",
+  "librehardwaremonitor",
+  "monitoring",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: System Administrators",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: MacOS",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: System :: Hardware",
+  "Topic :: System :: Monitoring",
+  "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.6",
+  "mypy>=1.11",
+  "build>=1.2",
+]
+
+[project.scripts]
+thermals = "thermals.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/7dul2/thermals"
+Repository = "https://github.com/7dul2/thermals"
+Issues = "https://github.com/7dul2/thermals/issues"
+Changelog = "https://github.com/7dul2/thermals/blob/main/CHANGELOG.md"
+
+[tool.hatch.version]
+path = "thermals/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["thermals"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "thermals/",
+  "tests/",
+  "README.md",
+  "LICENSE",
+  "CHANGELOG.md",
+  "pyproject.toml",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM", "RUF", "PTH", "N"]
+ignore = ["RUF012"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PTH"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_unreachable = true
+files = ["thermals", "tests"]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_decorators = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q -m 'not hardware'"
+markers = [
+  "hardware: requires real hardware sensors on the machine running the tests (run with: pytest -m hardware)",
+]
