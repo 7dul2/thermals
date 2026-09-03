@@ -18,6 +18,7 @@ Quality gate (also run by CI on Linux, Windows and macOS):
 ruff check .
 ruff format --check .
 mypy
+mypy --platform linux && mypy --platform win32   # what CI checks on the other OSes
 pytest                 # unit tests, no hardware needed
 pytest -m hardware     # real sensors on this machine (optional)
 python -m thermals --debug
