@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: ${{ matrix.os }} / py${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.10", "3.12", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+      - name: Lint
+        run: ruff check .
+      - name: Format
+        run: ruff format --check .
+      - name: Type check
+        run: mypy
+      - name: Unit tests
+        run: pytest
+      - name: Smoke test (must not crash without sensors)
+        run: |
+          python -m thermals --debug
+          python -m thermals --json --all
+          thermals --version
+      - name: Hardware tests (informational)
+        continue-on-error: true
+        run: pytest -m hardware
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build sdist and wheel
+        run: |
+          python -m pip install --upgrade pip build twine
+          python -m build
+          python -m twine check dist/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
