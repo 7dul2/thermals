@@ -19,13 +19,13 @@ Source            hwmon
 ```python
 import thermals
 
-print(thermals.cpu_temperature())   # 52.4  (float or None)
+print(thermals.cpu_temperature())  # 52.4  (float or None)
 
 reading = thermals.cpu()
-print(reading.value)        # 52.4
-print(reading.kind)         # SensorKind.CPU_PACKAGE
-print(reading.source)       # "hwmon"
-print(reading.confidence)   # Confidence.HIGH
+print(reading.value)  # 52.4
+print(reading.kind)  # SensorKind.CPU_PACKAGE
+print(reading.source)  # "hwmon"
+print(reading.confidence)  # Confidence.HIGH
 print(thermals.thermal_state())  # ThermalState.NOMINAL
 ```
 
