@@ -9,10 +9,10 @@ from __future__ import annotations
 
 import logging
 import os
+import platform
 import re
 import shutil
 import subprocess
-import sys
 from collections.abc import Callable
 from typing import ClassVar
 
@@ -60,6 +60,22 @@ def parse_powermetrics(text: str) -> tuple[list[TemperatureReading], ThermalStat
     return readings, state
 
 
+def _is_root() -> bool:
+    geteuid = getattr(os, "geteuid", None)
+    return geteuid is not None and geteuid() == 0
+
+
+def _precondition() -> str | None:
+    """Why ``powermetrics`` cannot run here, or ``None`` if it can."""
+    if platform.system() != "Darwin":
+        return "not running on macOS"
+    if not _is_root():
+        return "powermetrics requires root"
+    if shutil.which("powermetrics") is None:
+        return "powermetrics binary not found"
+    return None
+
+
 def run_powermetrics(samplers: str = "thermal,smc") -> str:
     """Run ``powermetrics`` once and return its stdout."""
     exe = shutil.which("powermetrics") or "/usr/bin/powermetrics"
@@ -97,14 +113,9 @@ class PowermetricsBackend(ThermalBackend):
 
     def available(self) -> bool:
         if self._runner is None:
-            if sys.platform != "darwin":
-                self._error = "not running on macOS"
-                return False
-            if os.geteuid() != 0:
-                self._error = "powermetrics requires root"
-                return False
-            if shutil.which("powermetrics") is None:
-                self._error = "powermetrics binary not found"
+            problem = _precondition()
+            if problem is not None:
+                self._error = problem
                 return False
         try:
             self._cache = self._run()
