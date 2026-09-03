@@ -1,0 +1,9 @@
+Machine model: Mac16,1
+OS version: 25A5
+Boot arguments: 
+
+*** Sampled system activity (Thu Sep  4 10:00:00 2026 +0800) (203.12ms elapsed) ***
+
+**** Thermal pressure ****
+
+Current pressure level: Nominal

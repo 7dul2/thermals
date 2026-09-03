@@ -1,0 +1,53 @@
+{
+ "machine": "synthetic M2 naming",
+ "readings": [
+  [
+   "pACC MTR Temp Sensor0",
+   48.2
+  ],
+  [
+   "pACC MTR Temp Sensor1",
+   49.5
+  ],
+  [
+   "eACC MTR Temp Sensor0",
+   41.0
+  ],
+  [
+   "GPU MTR Temp Sensor0",
+   39.7
+  ],
+  [
+   "GPU MTR Temp Sensor1",
+   40.1
+  ],
+  [
+   "PMGR SOC Die Temp Sensor0",
+   44.0
+  ],
+  [
+   "ANE MTR Temp Sensor0",
+   38.0
+  ],
+  [
+   "ISP MTR Temp Sensor0",
+   37.5
+  ],
+  [
+   "NAND CH0 temp",
+   33.0
+  ],
+  [
+   "gas gauge battery",
+   29.0
+  ],
+  [
+   "PMU tcal",
+   51.8
+  ],
+  [
+   "PMU tdev1",
+   -22.0
+  ]
+ ]
+}

@@ -1,0 +1,189 @@
+{
+ "machine": "Apple M5 (MacBook, macOS 26.6)",
+ "readings": [
+  [
+   "PMU tdie7",
+   35.49
+  ],
+  [
+   "PMU2 tdev3",
+   33.953
+  ],
+  [
+   "PMU2 tdie9",
+   32.452
+  ],
+  [
+   "PMU tdie11",
+   35.17
+  ],
+  [
+   "PMU2 tdie2",
+   33.731
+  ],
+  [
+   "gas gauge battery",
+   28.0
+  ],
+  [
+   "PMU tdie1",
+   35.65
+  ],
+  [
+   "PMU tdie4",
+   34.69
+  ],
+  [
+   "PMU2 tcal",
+   51.82
+  ],
+  [
+   "PMU tdev5",
+   34.788
+  ],
+  [
+   "PMU2 tdie6",
+   32.292
+  ],
+  [
+   "gas gauge battery",
+   29.2
+  ],
+  [
+   "PMU tdie8",
+   36.929
+  ],
+  [
+   "PMU2 tdev4",
+   34.04
+  ],
+  [
+   "PMU2 tdie10",
+   32.292
+  ],
+  [
+   "PMU tdie12",
+   35.01
+  ],
+  [
+   "PMU2 tdie3",
+   32.452
+  ],
+  [
+   "gas gauge battery",
+   29.0
+  ],
+  [
+   "NAND CH0 temp",
+   33.0
+  ],
+  [
+   "PMU tdie5",
+   35.57
+  ],
+  [
+   "PMU2 tdev1",
+   -22.333
+  ],
+  [
+   "PMU2 tdie7",
+   32.212
+  ],
+  [
+   "PMU tdie2",
+   34.77
+  ],
+  [
+   "PMU tdie9",
+   35.01
+  ],
+  [
+   "PMU2 tdev5",
+   33.416
+  ],
+  [
+   "gas gauge battery",
+   29.2
+  ],
+  [
+   "PMU tdie3",
+   35.25
+  ],
+  [
+   "PMU tdev6",
+   34.365
+  ],
+  [
+   "PMU tdev4",
+   35.063
+  ],
+  [
+   "PMU tdie13",
+   35.17
+  ],
+  [
+   "PMU2 tdie4",
+   32.611
+  ],
+  [
+   "PMU tdev1",
+   -21.865
+  ],
+  [
+   "gas gauge battery",
+   29.2
+  ],
+  [
+   "PMU tdie6",
+   36.529
+  ],
+  [
+   "PMU2 tdev2",
+   32.967
+  ],
+  [
+   "PMU tdev7",
+   36.509
+  ],
+  [
+   "PMU2 tdie8",
+   33.091
+  ],
+  [
+   "PMU tdie10",
+   34.45
+  ],
+  [
+   "PMU2 tdie1",
+   33.571
+  ],
+  [
+   "PMU tdev8",
+   35.306
+  ],
+  [
+   "PMU tdev2",
+   34.807
+  ],
+  [
+   "PMU tcal",
+   51.82
+  ],
+  [
+   "PMU tdie14",
+   34.85
+  ],
+  [
+   "PMU2 tdie5",
+   32.531
+  ],
+  [
+   "gas gauge battery",
+   28.6
+  ],
+  [
+   "PMU tdev3",
+   33.573
+  ]
+ ]
+}

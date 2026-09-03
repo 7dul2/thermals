@@ -1,0 +1,15 @@
+Machine model: MacBookPro16,1
+OS version: 21G72
+
+*** Sampled system activity (Thu Sep  4 10:00:00 2026 +0800) (204.55ms elapsed) ***
+
+**** SMC sensors ****
+
+CPU Thermal level: 0
+GPU Thermal level: 0
+IO Thermal level: 0
+Fan: 2000 rpm
+CPU die temperature: 52.34 C
+GPU die temperature: 45.00 C
+CPU Plimit: 0.00
+GPU Plimit (Int): 0.00
