@@ -41,4 +41,6 @@ Initial release.
 - [x] real macOS Apple Silicon test (Apple M5, macOS 26.6: `pytest -m hardware`)
 - [ ] real Windows test with LibreHardwareMonitor running
 - [x] Linux backend covered by fixtures and CI
+- [x] CI green on ubuntu, windows and macos (arm64) runners for Python 3.10, 3.12, 3.14
+- [x] Windows transport (PowerShell/WMI, HTTP) exercised on a real Windows runner without LibreHardwareMonitor: clean degradation, no crash
 - [x] README matches actual capabilities
