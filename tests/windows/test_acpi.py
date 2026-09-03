@@ -66,3 +66,31 @@ def test_backend_failure_paths(monkeypatch: pytest.MonkeyPatch) -> None:
     off_platform = ACPIThermalZoneBackend()
     assert not off_platform.available()
     assert off_platform.detail() == "not running on Windows"
+
+
+def test_failures_are_not_reprobed_immediately() -> None:
+    calls = {"n": 0}
+
+    def denied(script: str) -> str:
+        calls["n"] += 1
+        raise RuntimeError("Not supported")
+
+    backend = ACPIThermalZoneBackend(runner=denied)
+    assert not backend.available()
+    assert backend.sensors() == []
+    assert not backend.available()
+    assert calls["n"] == 1
+    assert backend.detail() == "Not supported"
+
+
+def test_successful_reads_are_cached_briefly() -> None:
+    calls = {"n": 0}
+
+    def runner(script: str) -> str:
+        calls["n"] += 1
+        return load_text("windows/acpi_thermal_zone.json")
+
+    backend = ACPIThermalZoneBackend(runner=runner)
+    assert backend.available()
+    assert len(backend.sensors()) == 1
+    assert calls["n"] == 1

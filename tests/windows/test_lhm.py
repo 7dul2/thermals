@@ -184,3 +184,22 @@ def test_classify_lhm_sensor(
     hardware_type: str, name: str, expected: tuple[SensorKind, Confidence] | None
 ) -> None:
     assert classify_lhm_sensor(hardware_type, name) == expected
+
+
+def test_failures_are_not_reprobed_immediately() -> None:
+    calls = {"wmi": 0, "http": 0}
+
+    def failing_wmi(script: str) -> str:
+        calls["wmi"] += 1
+        raise RuntimeError("Invalid namespace")
+
+    def failing_http(url: str) -> dict[str, Any]:
+        calls["http"] += 1
+        raise OSError("connection refused")
+
+    backend = LibreHardwareMonitorBackend(wmi_runner=failing_wmi, http_fetcher=failing_http)
+    assert not backend.available()
+    assert backend.sensors() == []
+    assert not backend.available()
+    assert calls == {"wmi": 1, "http": 1}
+    assert "Invalid namespace" in (backend.detail() or "")

@@ -34,6 +34,7 @@ SOURCE = "librehardwaremonitor"
 DEFAULT_HTTP_URL = "http://localhost:8085/data.json"
 ENV_HTTP_URL = "THERMALS_LHM_URL"
 _CACHE_SECONDS = 0.5
+_FAILURE_CACHE_SECONDS = 5.0
 
 WMI_SCRIPT = (
     "$hw = Get-CimInstance -Namespace root/LibreHardwareMonitor -ClassName Hardware "
@@ -211,13 +212,21 @@ class LibreHardwareMonitorBackend(ThermalBackend):
         self._http_fetcher = http_fetcher
         self._http_url = http_url or os.environ.get(ENV_HTTP_URL, DEFAULT_HTTP_URL)
         self._cache: tuple[float, list[TemperatureReading]] | None = None
+        self._failed_at: float | None = None
         self._errors: list[str] = []
         self._transport: str | None = None
 
     def _fetch(self) -> list[TemperatureReading]:
+        """Read sensors, caching successes briefly and failures a little longer.
+
+        Each probe spawns PowerShell, so an absent LibreHardwareMonitor must not
+        be re-probed on every API call.
+        """
         now = time.monotonic()
         if self._cache is not None and now - self._cache[0] < _CACHE_SECONDS:
             return self._cache[1]
+        if self._failed_at is not None and now - self._failed_at < _FAILURE_CACHE_SECONDS:
+            raise RuntimeError("; ".join(self._errors) or "LibreHardwareMonitor unavailable")
         errors: list[str] = []
         readings: list[TemperatureReading] | None = None
         runner = self._wmi_runner or run_powershell
@@ -238,7 +247,9 @@ class LibreHardwareMonitorBackend(ThermalBackend):
         self._errors = errors
         if readings is None:
             self._transport = None
+            self._failed_at = now
             raise RuntimeError("; ".join(errors))
+        self._failed_at = None
         self._cache = (now, readings)
         return readings
 

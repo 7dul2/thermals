@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import logging
 import sys
+import time
 from collections.abc import Callable
 from typing import Any, ClassVar
 
@@ -21,6 +22,8 @@ from thermals.utils.temperature import decikelvin_to_celsius, is_plausible
 log = logging.getLogger("thermals.backends.acpi")
 
 SOURCE = "acpi"
+_CACHE_SECONDS = 0.5
+_FAILURE_CACHE_SECONDS = 5.0
 
 ACPI_SCRIPT = (
     "@(Get-CimInstance -Namespace root/WMI -ClassName MSAcpi_ThermalZoneTemperature "
@@ -69,10 +72,26 @@ class ACPIThermalZoneBackend(ThermalBackend):
     def __init__(self, runner: Callable[[str], str] | None = None) -> None:
         self._runner = runner
         self._error: str | None = None
+        self._cache: tuple[float, list[TemperatureReading]] | None = None
+        self._failed_at: float | None = None
 
     def _read(self) -> list[TemperatureReading]:
+        """Query WMI, caching successes briefly and failures a little longer."""
+        now = time.monotonic()
+        if self._cache is not None and now - self._cache[0] < _CACHE_SECONDS:
+            return self._cache[1]
+        if self._failed_at is not None and now - self._failed_at < _FAILURE_CACHE_SECONDS:
+            raise RuntimeError(self._error or "ACPI thermal zones unavailable")
         runner = self._runner or run_powershell
-        return parse_acpi_payload(runner(ACPI_SCRIPT))
+        try:
+            readings = parse_acpi_payload(runner(ACPI_SCRIPT))
+        except Exception as exc:
+            self._failed_at = now
+            self._error = str(exc)
+            raise
+        self._failed_at = None
+        self._cache = (now, readings)
+        return readings
 
     def available(self) -> bool:
         if self._runner is None and sys.platform != "win32":
